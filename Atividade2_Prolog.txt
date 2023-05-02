@@ -1,0 +1,56 @@
+/*
+Considerando o código ao lado, realize
+a seguintes consultas em Prolog:
+a) Listar todas as classes que herdam
+da classe Pessoa.
+b) Listar todas as classes que herdam
+da classe Aluno.
+c) Listar todas as classes que herdam
+da classe Professor.
+d) Listar todas as classes que
+contratam a interface Pessoa.
+e) Listar todas as classes que
+contratam a interface Professor.
+f) Listar todas as classes filhas da
+classe Pessoa.
+g) Listar todas as classes filhas da
+classe Professor.
+h) Listar a interface que a classe
+Aluno implementa
+*/
+
+/* 1) Fatos */
+interface("ItfPessoa").
+interface("ItfAluno").
+interface("ItfProfessor").
+interface("ItfCoordenador").
+
+classe("ClsPessoa").
+classe("ClsAluno").
+classe("ClsProfessor").
+classe("ClsCoordenador").
+
+implementa("ClsPessoa", "ItfPessoa").
+implementa("ClsAluno", "ItfAluno").
+implementa("ClsProfessor", "ItfProfessor").
+implementa("ClsCoordenador", "ItfCoordenador").
+
+herda("ClsAluno", "ClsPessoa").
+herda("ClsProfessor", "ClsPessoa").
+herda("ClsCoordenador", "ClsProfessor").
+
+/* 2) Regras */
+subclasse(X, Y) :- classe(X), herda(X, Y), classe(Y).
+contrata(X, Y) :- classe(X), implementa(X, Y), interface(Y).
+
+
+
+/* 3) Consultas */
+a) subclasse(X, "ClsPessoa")
+b) subclasse(X, "ClsAluno")
+c) subclasse(X, "ClsProfessor")
+d) contrata(X, "ItfPessoa")
+e) contrata(X, "ItfProfessor")
+f) herda(X, "ClsPessoa"),classe(X)
+g) herda(X, "ClsProfessor"),classe(X)
+h) implementa("ClsAluno", Y), interface(Y)

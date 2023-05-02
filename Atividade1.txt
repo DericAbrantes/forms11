@@ -1,0 +1,68 @@
+/*
+1) Considerando o código ao lado, realize
+as seguintes consultas em Prolog:
+a) Listar todas as mães.
+b) Listar todas as filhas.
+c) Listar todos os filhos.
+d) Listar as avós.
+e) Listar os avôs.
+f) Listar os netos.
+g) Listar as netas.
+h) Listar todas as irmãs.
+i) Listar todos os irmãos.
+j) Listar os filhos de Maria.
+k) Listar as filhas de Sílvia.
+l) Listar os filhos de rodrigo.
+*/
+
+/* 1) Fatos */
+progenitor(maria, rodrigo).
+progenitor(emanuel, rodrigo).
+
+progenitor(rodrigo, julia).
+progenitor(silvia, julia).
+
+progenitor(rodrigo, jorge).
+progenitor(ana, jorge).
+
+masculino(emanuel). /* Predicado unário */
+masculino(rodrigo).
+masculino(jorge).
+
+feminino(maria).
+feminino(ana).
+feminino(julia).
+feminino(silvia).
+
+/* 2) Regras */
+irmao(X, Y) :- progenitor(Z, X), progenitor(Z, Y), masculino(X), not(X = Y).
+irma(X, Y) :- progenitor(Z, X), progenitor(Z, Y), feminino(X), not(X = Y).
+
+pai(X, Y) :- progenitor(X, Y), masculino(X).
+mae(X, Y) :- progenitor(X, Y), feminino(X).
+
+filho(X, Y) :- progenitor(Y, X), masculino(X), not(X = Y).
+filha(X, Y) :- progenitor(Y, X), feminino(X), not(X = Y).
+
+avoh(X, Z) :- progenitor(X, Y), progenitor(Y, Z), masculino(X), not(X = Y).
+avo(X, Z) :- progenitor(X, Y), progenitor(Y, Z), feminino(X), not(X = Y).
+
+neto(X, Y) :- progenitor(Y, Z), progenitor(Z, X), masculino(X), not(X = Y).
+neta(X, Y) :- progenitor(Y, Z), progenitor(Z, X), feminino(X), not(X = Y).
+
+
+
+/* 3) Consultas */
+/*write('Todas as mães:'), mae(X, _)*/
+/*write('Todos os pais:'), pai(X, _)*/
+/*write('Todos os irmãos:'), irmao(X, _)*/
+/*write('Todas as irmãs:'), irma(X, _)*/
+/*write('Todos os filhos:'), filho(X, _)*/
+/*write('Todas as filhas:'), filha(X, _)*/
+/*write('Todas as avós:'), avo(X,_)*/
+/*write('Todos os avôs:'), avoh(X, _)*/
+/*write('Todos os netos:'), neto(X, _)*/
+/*write('Todos os netas:'), neta(X, _)*/
+/*write('Filhos de maria:'), mae(maria, Y)*/
+/*write('Filhos de Silvia:'), mae(silvia, Y)*/
+/*write('Filhos de Rodrigo:'), pai(rodrigo, Y)*/

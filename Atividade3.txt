@@ -1,0 +1,100 @@
+/*
+3) Em Prolog, apresente, no mínimo, 3 fatos, 3 regras e 5 consultas para os seguintes domínios:
+a) Aviação.
+b) Comércio.
+c) Medicina.
+d) Meio ambiente.
+e) Tecnologia.
+*/
+
+
+/*a) Aviação:
+Fatos:*/
+aviao(boeing747, 416).
+aviao(airbusA380, 853).
+aviao(embaer195, 120).
+/*Regras:*/
+aviao_grande(X) :- aviao(X, Y), Y >= 400.
+aviao_pequeno(X) :- aviao(X, Y), Y < 200.
+aviao_medio(X) :- aviao(X, Y), Y >= 200, Y < 400.
+
+
+/*b) Comércio:
+Fatos:*/
+produto(celular, 1200).
+produto(notebook, 3000).
+produto(tv, 2500).
+/*Regras:*/
+produto_caro(X) :- produto(X, Y), Y >= 2500.
+produto_barato(X) :- produto(X, Y), Y < 1500.
+produto_medio(X) :- produto(X, Y), Y >= 1500, Y < 2500.
+
+
+/*c) Medicina:
+Fatos:*/
+doenca(cancer, tratamento_quimioterapia).
+doenca(pneumonia, tratamento_antibiotico).
+doenca(diabetes, tratamento_insulina).
+/*Regras:*/
+tratamento(X, Y) :- doenca(X, Y).
+doenca_grave(X) :- doenca(X, tratamento_quimioterapia).
+doenca_leve(X) :- doenca(X, tratamento_antibiotico).
+
+/*d) Meio ambiente:
+Fatos:*/
+poluente(gas_carbonico, fonte_carros).
+poluente(chumbo, fonte_industria).
+poluente(mercurio, fonte_mineracao).
+/*Regras:*/
+poluente_perigoso(X) :- poluente(X, fonte_mineracao).
+poluente_menos_perigoso(X) :- poluente(X, fonte_industria).
+poluente_nao_perigoso(X) :- poluente(X, fonte_carros).
+
+/*e) Tecnologia:
+Fatos:*/
+sistema_operacional(windows, empresa_microsoft).
+sistema_operacional(macOS, empresa_apple).
+sistema_operacional(linux, empresa_comunidade).
+/*Regras:*/
+sistema_operacional_proprietario(X) :- sistema_operacional(X, empresa_microsoft);sistema_operacional(X, empresa_apple).
+sistema_operacional_livre(X) :- sistema_operacional(X, empresa_comunidade).
+sistema_operacional(X, Y) :- sistema_operacional(X, Y).
+
+
+
+/*a)Consultas:*/
+/*aviao(boeing747, X).*/
+/*aviao_medio(X)*/
+/*aviao_pequeno(X)*/
+/*aviao_grande(X)*/
+/*aviao(X, 416).*/
+
+/*b) Consultas:*/
+/*produto(celular, X).
+produto_medio(X).
+produto_barato(X).
+produto_caro(X).
+produto(X, 1200).*/
+
+/*c) Consultas:*/
+/*doenca(cancer, X).
+doenca_leve(X).
+doenca_grave(X).
+tratamento(diabetes, X).
+doenca(X, tratamento_insulina).*/
+
+
+/*d) Consultas:*/
+/*poluente(gas_carbonico, X).
+poluente_menos_perigoso(X).
+poluente_perigoso(X).
+poluente_nao_perigoso(X).
+poluente(X, fonte_carros).*/
+
+
+/*e) Consultas:*/
+/*sistema_operacional(windows, X).
+sistema_operacional_livre(X).
+sistema_operacional_proprietario(X).
+sistema_operacional(linux, empresa_comunidade).
+sistema_operacional(X, empresa_microsoft).*/
